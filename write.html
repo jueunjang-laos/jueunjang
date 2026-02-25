@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일지 쓰기 — 라오스 한글교육</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf5ed; --warm: #f2e8d5; --terracotta: #c4784a; --clay: #a85c35;
+  --deep: #2c1f0f; --sage: #6b8f71; --sage-light: #d6e8d8; --gold: #c9a84c;
+  --text: #2c1a0e; --muted: #8a7560;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--cream); font-family: 'Noto Sans KR', sans-serif; color: var(--text); min-height: 100vh; background-image: radial-gradient(ellipse at 15% 10%, rgba(196,120,74,0.07) 0%, transparent 50%), radial-gradient(ellipse at 85% 90%, rgba(107,143,113,0.07) 0%, transparent 50%); }
+
+/* NAV */
+nav { background: var(--deep); display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; }
+.nav-logo { font-family: 'Gowun Batang', serif; font-size: 1rem; color: var(--sand, #e8d5b7); letter-spacing: 0.05em; }
+.nav-back { font-size: 0.78rem; color: rgba(232,213,183,0.6); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+.nav-back:hover { color: var(--terracotta); }
+
+/* MAIN */
+main { max-width: 680px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+.page-title { font-family: 'Gowun Batang', serif; font-size: 1.8rem; font-weight: 700; color: var(--deep); margin-bottom: 0.4rem; }
+.page-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 2.5rem; }
+
+/* STATUS */
+#statusBanner { display:none; padding:1rem 1.4rem; border-radius:10px; margin-bottom:1.5rem; font-size:0.88rem; animation:fadeIn 0.3s ease; }
+#statusBanner.success { background:var(--sage-light); color:#2d5a32; border:1px solid rgba(107,143,113,0.3); }
+#statusBanner.error { background:#fde8e8; color:#7a2020; border:1px solid rgba(200,80,80,0.3); }
+
+/* CARDS */
+.card { background:#fff; border-radius:14px; padding:1.8rem; margin-bottom:1.2rem; border:1px solid rgba(196,120,74,0.1); box-shadow:0 2px 12px rgba(44,31,15,0.05); animation:slideUp 0.5s ease both; }
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}.card:nth-child(6){animation-delay:.25s}
+.card-title { font-family:'Gowun Batang',serif; font-size:1rem; font-weight:700; color:var(--clay); margin-bottom:1.4rem; display:flex; align-items:center; gap:0.6rem; }
+.card-icon { width:28px;height:28px; background:var(--warm); border-radius:8px; display:flex;align-items:center;justify-content:center; font-size:0.9rem; }
+
+/* FIELDS */
+.field { margin-bottom:1.1rem; }
+.field:last-child { margin-bottom:0; }
+label { display:block; font-size:0.78rem; font-weight:500; color:var(--muted); letter-spacing:0.04em; margin-bottom:0.4rem; }
+label .req { color:var(--terracotta); }
+input[type="text"], input[type="date"], input[type="number"], textarea, select {
+  width:100%; padding:0.72rem 1rem; border:1.5px solid rgba(196,120,74,0.2); border-radius:10px;
+  font-family:'Noto Sans KR',sans-serif; font-size:0.9rem; color:var(--text); background:var(--cream);
+  transition:border-color 0.2s, box-shadow 0.2s; outline:none; -webkit-appearance:none;
+}
+input:focus, textarea:focus { border-color:var(--terracotta); box-shadow:0 0 0 3px rgba(196,120,74,0.1); background:#fff; }
+textarea { resize:vertical; min-height:95px; line-height:1.7; }
+.row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+@media(max-width:480px){.row{grid-template-columns:1fr;}}
+
+/* CHAR COUNTER */
+.char-wrap { position:relative; }
+.char-count { position:absolute; bottom:10px; right:12px; font-size:0.68rem; color:var(--muted); pointer-events:none; }
+
+/* MOOD */
+.mood-picker { display:flex; gap:0.5rem; flex-wrap:wrap; }
+.mood-radio { display:none; }
+.mood-label { display:flex; flex-direction:column; align-items:center; gap:0.25rem; padding:0.6rem 0.75rem; border:1.5px solid rgba(196,120,74,0.2); border-radius:12px; cursor:pointer; font-size:0.7rem; color:var(--muted); background:var(--cream); transition:all 0.18s; user-select:none; }
+.mood-label .em { font-size:1.4rem; }
+.mood-radio:checked + .mood-label { border-color:var(--terracotta); background:var(--warm); color:var(--clay); box-shadow:0 2px 8px rgba(196,120,74,0.18); }
+
+/* TAGS */
+.tag-group { display:flex; flex-wrap:wrap; gap:0.45rem; }
+.tag-cb { display:none; }
+.tag-label { padding:0.38rem 0.85rem; border:1.5px solid rgba(196,120,74,0.22); border-radius:20px; font-size:0.76rem; cursor:pointer; color:var(--muted); background:var(--cream); transition:all 0.18s; user-select:none; }
+.tag-cb:checked + .tag-label { background:var(--sage-light); border-color:var(--sage); color:#2d5a32; }
+
+/* TOGGLE */
+.toggle-wrap { display:flex; align-items:center; gap:0.8rem; margin-bottom:1rem; }
+.toggle { position:relative; width:44px; height:24px; }
+.toggle input { opacity:0; width:0; height:0; }
+.toggle-slider { position:absolute; inset:0; background:rgba(196,120,74,0.2); border-radius:24px; cursor:pointer; transition:0.2s; }
+.toggle-slider::before { content:''; position:absolute; width:18px;height:18px; left:3px;top:3px; background:white; border-radius:50%; transition:0.2s; box-shadow:0 1px 4px rgba(0,0,0,0.15); }
+.toggle input:checked + .toggle-slider { background:var(--sage); }
+.toggle input:checked + .toggle-slider::before { transform:translateX(20px); }
+.toggle-lbl { font-size:0.85rem; color:var(--text); font-weight:500; }
+#essayFields { display:none; }
+#essayFields.open { display:block; }
+
+/* PHOTO */
+.upload-zone { border:2px dashed rgba(196,120,74,0.3); border-radius:12px; padding:1.8rem; text-align:center; cursor:pointer; position:relative; transition:all 0.2s; background:var(--cream); }
+.upload-zone:hover { border-color:var(--terracotta); background:var(--warm); }
+.upload-zone input { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+.upload-zone .uz-icon { font-size:1.8rem; margin-bottom:0.4rem; }
+.upload-zone p { font-size:0.8rem; color:var(--muted); }
+.upload-zone strong { color:var(--terracotta); }
+#preview { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.8rem; }
+#preview img { width:72px; height:72px; object-fit:cover; border-radius:8px; border:2px solid var(--warm); }
+
+/* SUBMIT */
+.submit-area { text-align:center; margin-top:0.5rem; }
+button[type="submit"] { background:var(--clay); color:var(--cream); border:none; padding:0.95rem 3rem; border-radius:40px; font-family:'Gowun Batang',serif; font-size:1rem; font-weight:700; letter-spacing:0.06em; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 14px rgba(168,92,53,0.35); }
+button[type="submit"]:hover { background:var(--terracotta); transform:translateY(-2px); }
+button[type="submit"]:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+@keyframes slideUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">✦ 봉사일지 쓰기</div>
+  <a href="index.html" class="nav-back">← 포트폴리오로 돌아가기</a>
+</nav>
+
+<main>
+  <div class="page-title">오늘 일지 쓰기</div>
+  <div class="page-sub">수업 후 10분, 오늘을 기록해두면 나중의 나에게 큰 선물이 돼 🌿</div>
+
+  <div id="statusBanner"></div>
+
+  <form id="form">
+
+    <!-- 기본 정보 -->
+    <div class="card">
+      <div class="card-title"><span class="card-icon">📋</span>기본 정보</div>
+      <div class="row">
+        <div class="field"><label>날짜 <span class="req">*</span></label><input type="date" id="date" required></div>
+        <div class="field"><label>회차 <span class="req">*</span></label><input type="number" id="session" min="1" placeholder="예: 1" required></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>출석 학생 수</label><input type="number" id="students" min="0" placeholder="명"></div>
+        <div class="field"><label>수업 시간 (분)</label><input type="number" id="duration" min="0" placeholder="예: 60"></div>
+      </div>
+    </div>
+
+    <!-- 수업 내용 -->
+    <div class="card">
+      <div class="card-title"><span class="card-icon">📚</span>수업 내용</div>
+      <div class="field"><label>오늘 수업 주제 <span class="req">*</span></label><input type="text" id="topic" placeholder="예: 모음 ㅏ, ㅓ, ㅗ 소개" required></div>
+      <div class="field"><label>사용한 교재/자료</label><input type="text" id="materials" placeholder="예: 플래시카드, 노래, 직접 만든 워크시트"></div>
+      <div class="field"><label>수업 방식</label><textarea id="method" placeholder="어떻게 가르쳤는지 간단히&#10;예: 따라 읽기 → 짝 활동 → 퀴즈"></textarea></div>
+      <div class="field"><label>주요 활동</label><textarea id="activities" placeholder="오늘 진행한 활동들"></textarea></div>
+    </div>
+
+    <!-- 아이들 반응 -->
+    <div class="card">
+      <div class="card-title"><span class="card-icon">✨</span>아이들 반응 & 인상적인 순간</div>
+      <div class="field">
+        <div class="char-wrap">
+          <textarea id="reaction" maxlength="600" placeholder="특별히 기억에 남는 아이, 재미있었던 반응, 예상 밖의 상황 등&#10;&#10;예: ○○가 처음으로 혼자 '가나다'를 읽었을 때 반짝이던 눈..."></textarea>
+          <span class="char-count" id="rc">0/600</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 감정 & 소감 -->
+    <div class="card">
+      <div class="card-title"><span class="card-icon">💬</span>오늘의 감정 & 소감</div>
+      <div class="field">
+        <label>오늘 기분은?</label>
+        <div class="mood-picker">
+          <input type="radio" name="mood" id="m1" class="mood-radio" value="설렘 😊">
+          <label for="m1" class="mood-label"><span class="em">😊</span>설렘</label>
+          <input type="radio" name="mood" id="m2" class="mood-radio" value="뿌듯함 💪">
+          <label for="m2" class="mood-label"><span class="em">💪</span>뿌듯함</label>
+          <input type="radio" name="mood" id="m3" class="mood-radio" value="당황 😅">
+          <label for="m3" class="mood-label"><span class="em">😅</span>당황</label>
+          <input type="radio" name="mood" id="m4" class="mood-radio" value="어려움 😔">
+          <label for="m4" class="mood-label"><span class="em">😔</span>어려움</label>
+          <input type="radio" name="mood" id="m5" class="mood-radio" value="고민 🤔">
+          <label for="m5" class="mood-label"><span class="em">🤔</span>고민</label>
+          <input type="radio" name="mood" id="m6" class="mood-radio" value="지침 😴">
+          <label for="m6" class="mood-label"><span class="em">😴</span>지침</label>
+        </div>
+      </div>
+      <div class="field"><label>어려웠던 점 / 예상과 달랐던 것</label><textarea id="challenges" placeholder="솔직하게 써도 괜찮아요. 어려운 점이 가장 중요한 성장 자료가 돼요."></textarea></div>
+      <div class="field">
+        <label>감정 일기 — 오늘 하루 솔직한 이야기</label>
+        <div class="char-wrap">
+          <textarea id="diary" maxlength="800" style="min-height:120px" placeholder="기쁨, 당황, 뿌듯함, 지침 — 뭐든 OK!&#10;이 공간은 오롯이 너의 것이야 🌿"></textarea>
+          <span class="char-count" id="dc">0/800</span>
+        </div>
+      </div>
+      <div class="field"><label>다음엔 이렇게 바꿔볼 거야</label><textarea id="nextPlan" placeholder="개선할 점이나 다음 수업 아이디어"></textarea></div>
+    </div>
+
+    <!-- 사진 -->
+    <div class="card">
+      <div class="card-title"><span class="card-icon">📸</span>사진 / 영상</div>
+      <div class="field">
+        <label>오늘 찍은 사진 (선택)</label>
+        <div class="upload-zone">
+          <input type="file" id="photos" accept="image/*,video/*" multiple>
+          <div class="uz-icon">🖼️</div>
+          <p><strong>클릭</strong>하거나 끌어다 놓으세요<br><span style="font-size:0.73rem">여러 장 가능</span></p>
+        </div>
+        <div id="preview"></div>
+      </div>
+      <div class="field"><label>사진 설명 (선택)</label><input type="text" id="photoDesc" placeholder="예: 아이들이 직접 쓴 'ㅏ' 카드"></div>
+    </div>
+
+    <!-- 에세이 메모 -->
+    <div class="card">
+      <div class="card-title"><span class="card-icon">🎓</span>입시 에세이 연결 메모</div>
+      <div class="toggle-wrap">
+        <label class="toggle"><input type="checkbox" id="essayToggle"><span class="toggle-slider"></span></label>
+        <span class="toggle-lbl">오늘 에세이 소재가 될 만한 순간이 있었어!</span>
+      </div>
+      <div id="essayFields">
+        <div class="field">
+          <label>어떤 에세이 주제와 연결될 것 같아?</label>
+          <div class="tag-group">
+            <input type="checkbox" class="tag-cb" id="t1" value="도전 & 극복"><label for="t1" class="tag-label">도전 & 극복</label>
+            <input type="checkbox" class="tag-cb" id="t2" value="나를 형성한 경험"><label for="t2" class="tag-label">나를 형성한 경험</label>
+            <input type="checkbox" class="tag-cb" id="t3" value="리더십"><label for="t3" class="tag-label">리더십</label>
+            <input type="checkbox" class="tag-cb" id="t4" value="커뮤니티 기여"><label for="t4" class="tag-label">커뮤니티 기여</label>
+            <input type="checkbox" class="tag-cb" id="t5" value="지적 호기심"><label for="t5" class="tag-label">지적 호기심</label>
+            <input type="checkbox" class="tag-cb" id="t6" value="정체성 & 문화"><label for="t6" class="tag-label">정체성 & 문화</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>에세이 소재 메모</label>
+          <div class="char-wrap">
+            <textarea id="essayMemo" maxlength="500" style="min-height:100px" placeholder="어떤 장면, 어떤 감정이 에세이로 쓸 만할 것 같아?&#10;나중에 이 메모가 큰 도움이 돼!"></textarea>
+            <span class="char-count" id="ec">0/500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button type="submit" id="submitBtn">✦ 오늘의 일지 저장하기 ✦</button>
+    </div>
+  </form>
+</main>
+
+<script>
+// ★ 여기에 Google Apps Script URL을 붙여넣으세요
+const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+// 날짜 기본값
+const di = document.getElementById('date');
+di.value = new Date().toISOString().split('T')[0];
+
+// 글자 수
+function cc(taId, ctId) {
+  const ta = document.getElementById(taId), ct = document.getElementById(ctId);
+  ta.addEventListener('input', () => ct.textContent = `${ta.value.length}/${ta.maxLength}`);
+}
+cc('reaction','rc'); cc('diary','dc'); cc('essayMemo','ec');
+
+// 에세이 토글
+document.getElementById('essayToggle').addEventListener('change', function() {
+  document.getElementById('essayFields').classList.toggle('open', this.checked);
+});
+
+// 사진 미리보기
+document.getElementById('photos').addEventListener('change', function() {
+  const p = document.getElementById('preview'); p.innerHTML = '';
+  [...this.files].slice(0,8).forEach(f => {
+    if(!f.type.startsWith('image/')) return;
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(f); p.appendChild(img);
+  });
+});
+
+// 제출
+document.getElementById('form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const themes = [...document.querySelectorAll('.tag-cb:checked')].map(c=>c.value);
+  const mood = document.querySelector('.mood-radio:checked');
+  const data = {
+    날짜: document.getElementById('date').value,
+    회차: document.getElementById('session').value,
+    학생수: document.getElementById('students').value,
+    수업시간: document.getElementById('duration').value,
+    수업주제: document.getElementById('topic').value,
+    교재자료: document.getElementById('materials').value,
+    수업방식: document.getElementById('method').value,
+    주요활동: document.getElementById('activities').value,
+    아이들반응: document.getElementById('reaction').value,
+    오늘기분: mood ? mood.value : '',
+    어려웠던점: document.getElementById('challenges').value,
+    감정일기: document.getElementById('diary').value,
+    다음계획: document.getElementById('nextPlan').value,
+    사진설명: document.getElementById('photoDesc').value,
+    에세이여부: document.getElementById('essayToggle').checked ? '✅' : '',
+    에세이테마: themes.join(', '),
+    에세이메모: document.getElementById('essayMemo').value,
+    제출시각: new Date().toLocaleString('ko-KR'),
+  };
+
+  if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    showBanner('success', '✅ 데이터 확인 완료! Google Apps Script URL을 연결하면 구글 시트에 자동 저장돼요.');
+    console.log('저장 데이터:', data);
+    return;
+  }
+
+  btn.disabled = true; btn.textContent = '저장 중...';
+  try {
+    await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+    showBanner('success', '🎉 오늘 일지가 구글 시트에 저장됐어! 수고했어 💪');
+    this.reset(); di.value = new Date().toISOString().split('T')[0];
+    document.getElementById('preview').innerHTML = '';
+    document.getElementById('essayFields').classList.remove('open');
+  } catch(err) {
+    showBanner('error', '⚠️ 저장 오류. 인터넷 연결을 확인하거나 다시 시도해주세요.');
+  } finally {
+    btn.disabled = false; btn.textContent = '✦ 오늘의 일지 저장하기 ✦';
+  }
+});
+
+function showBanner(type, msg) {
+  const b = document.getElementById('statusBanner');
+  b.className = type; b.textContent = msg; b.style.display = 'block';
+  b.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if(type==='success') setTimeout(()=>b.style.display='none', 7000);
+}
+</script>
+</body>
+</html>
