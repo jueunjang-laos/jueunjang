@@ -797,9 +797,7 @@ function filterTimeline(cat, btn){
     });
   }, 50);
 }
-// 1. 이 부분을 찾아서 숫자를 60으로 수정하세요
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRihEegYUxBULsqkZhgVcNAug7DKQfD3mU-jJehpuWgZfIYcMefLLGkPTAdyXbdLguWCqMmiQMCoSg2/pub?gid=0&single=true&output=csv';
-const EXTRA_HOURS = 60; // 2023년부터의 기본 봉사시간 60시간을 여기에 입력했습니다.
+
 // ─── TIMELINE LOADER ───
 async function loadTimeline(){
   const container = document.getElementById('timelineContainer');
