@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jueun Jang — Marine Biologist in Training</title>
+<title>Jueun Jang — Aspiring Scientist & Visual Storyteller</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -797,7 +797,9 @@ function filterTimeline(cat, btn){
     });
   }, 50);
 }
-
+// 1. 이 부분을 찾아서 숫자를 60으로 수정하세요
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRihEegYUxBULsqkZhgVcNAug7DKQfD3mU-jJehpuWgZfIYcMefLLGkPTAdyXbdLguWCqMmiQMCoSg2/pub?gid=0&single=true&output=csv';
+const EXTRA_HOURS = 60; // 2023년부터의 기본 봉사시간 60시간을 여기에 입력했습니다.
 // ─── TIMELINE LOADER ───
 async function loadTimeline(){
   const container = document.getElementById('timelineContainer');
