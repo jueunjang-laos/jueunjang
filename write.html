@@ -81,29 +81,6 @@ textarea { resize:vertical; min-height:95px; line-height:1.7; }
 #essayFields { display:none; }
 #essayFields.open { display:block; }
 
-/* PHOTO */
-.photo-source-tabs { display:flex; gap:0.5rem; margin-bottom:1rem; }
-.photo-tab-btn {
-  flex:1; padding:0.6rem 0.5rem; border:1.5px solid rgba(196,120,74,0.25);
-  border-radius:10px; background:var(--cream); font-family:'Noto Sans KR',sans-serif;
-  font-size:0.8rem; color:var(--muted); cursor:pointer; transition:all 0.18s;
-  display:flex; flex-direction:column; align-items:center; gap:0.2rem;
-}
-.photo-tab-btn .tab-icon { font-size:1.3rem; }
-.photo-tab-btn.active { background:var(--warm); border-color:var(--terracotta); color:var(--clay); font-weight:500; }
-
-.photo-btn-wrap { display:flex; align-items:center; gap:1rem; }
-.photo-btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.65rem 1.2rem; background:var(--warm); border:1.5px solid rgba(196,120,74,0.3); border-radius:10px; font-size:0.85rem; color:var(--clay); cursor:pointer; transition:all 0.18s; font-family:'Noto Sans KR',sans-serif; font-weight:500; }
-.photo-btn:hover { background:var(--terracotta); color:#fff; border-color:var(--terracotta); }
-.photo-btn input { display:none; }
-.photo-hint { font-size:0.75rem; color:var(--muted); line-height:1.5; }
-#photoPreviewWrap { margin-top:0.9rem; display:none; position:relative; }
-#photoPreviewWrap.has-photo { display:block; }
-#photoPreview { width:100%; max-height:220px; object-fit:cover; border-radius:10px; border:2px solid var(--warm); display:block; }
-.photo-remove { position:absolute; top:6px; right:6px; background:rgba(44,31,15,0.65); color:#fff; border:none; border-radius:50%; width:26px; height:26px; font-size:0.85rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.photo-status { font-size:0.76rem; color:var(--sage); margin-top:0.4rem; }
-.photo-status.warn { color:#9a6200; }
-
 /* SIZE GUIDE */
 .size-guide { background:var(--warm); border-radius:8px; padding:0.75rem 1rem; margin-top:0.8rem; font-size:0.76rem; color:var(--clay); line-height:1.6; border:1px solid rgba(196,120,74,0.2); }
 .size-guide strong { display:block; margin-bottom:0.2rem; }
@@ -197,49 +174,21 @@ button[type="submit"]:disabled { opacity:0.6; cursor:not-allowed; transform:none
       <div class="field"><label>다음엔 이렇게 바꿔볼 거야</label><textarea id="nextPlan" placeholder="개선할 점이나 다음 수업 아이디어"></textarea></div>
     </div>
 
-    <!-- 사진 -->
+    <!-- 사진 링크 -->
     <div class="card">
       <div class="card-title">
-        <span class="card-icon">📸</span>대표 사진
+        <span class="card-icon">📸</span>사진 링크
         <span style="font-size:0.75rem;font-weight:400;color:var(--muted);margin-left:0.3rem">(선택)</span>
       </div>
-
-      <!-- 탭: 갤러리 / 카메라 -->
-      <div class="photo-source-tabs">
-        <button type="button" class="photo-tab-btn active" id="tabGallery" onclick="switchPhotoTab('gallery')">
-          <span class="tab-icon">🖼️</span>갤러리에서 선택
-        </button>
-        <button type="button" class="photo-tab-btn" id="tabCamera" onclick="switchPhotoTab('camera')">
-          <span class="tab-icon">📷</span>지금 바로 촬영
-        </button>
-      </div>
-
       <div class="field">
-        <div class="photo-btn-wrap">
-          <!-- 갤러리: accept만, capture 없음 -->
-          <label class="photo-btn" id="galleryLabel">
-            🖼️ 갤러리 열기
-            <input type="file" id="photosGallery" accept="image/*">
-          </label>
-          <!-- 카메라: capture="environment" -->
-          <label class="photo-btn" id="cameraLabel" style="display:none;">
-            📷 카메라 열기
-            <input type="file" id="photosCamera" accept="image/*" capture="environment">
-          </label>
-          <span class="photo-hint">없어도 괜찮아요 🌿<br>봉사 후 갤러리에서 골라도 돼요</span>
-        </div>
-
-        <div class="size-guide">
-          <strong>💡 사진 팁</strong>
-          갤러리에서 수업 중 찍어둔 사진을 나중에 골라도 돼요.<br>
-          자동으로 압축되지만 <strong>원본 10MB 이하</strong>를 권장해요.
-        </div>
-
-        <div id="photoPreviewWrap">
-          <img id="photoPreview" src="" alt="미리보기">
-          <button type="button" class="photo-remove" id="photoRemove" title="사진 삭제">✕</button>
-          <div class="photo-status" id="photoStatus"></div>
-        </div>
+        <label>구글 드라이브 공유 URL</label>
+        <input type="text" id="photoUrl" placeholder="https://drive.google.com/file/d/…">
+      </div>
+      <div class="size-guide">
+        <strong>📂 사진 업로드 순서</strong>
+        1. 사진을 구글 드라이브 수업 폴더에 업로드<br>
+        2. 파일 우클릭 → <strong>공유 → 링크 복사</strong><br>
+        3. 위 칸에 붙여넣기 후 저장
       </div>
     </div>
 
@@ -297,106 +246,6 @@ document.getElementById('essayToggle').addEventListener('change', function() {
   document.getElementById('essayFields').classList.toggle('open', this.checked);
 });
 
-// 사진 탭 전환
-function switchPhotoTab(mode) {
-  const galleryLabel = document.getElementById('galleryLabel');
-  const cameraLabel = document.getElementById('cameraLabel');
-  const tabGallery = document.getElementById('tabGallery');
-  const tabCamera = document.getElementById('tabCamera');
-
-  if (mode === 'gallery') {
-    galleryLabel.style.display = '';
-    cameraLabel.style.display = 'none';
-    tabGallery.classList.add('active');
-    tabCamera.classList.remove('active');
-  } else {
-    galleryLabel.style.display = 'none';
-    cameraLabel.style.display = '';
-    tabGallery.classList.remove('active');
-    tabCamera.classList.add('active');
-  }
-}
-
-// 사진 처리 공통 함수
-let photoBase64 = null;
-
-async function handlePhotoFile(file) {
-  if (!file) return;
-  const status = document.getElementById('photoStatus');
-  const previewWrap = document.getElementById('photoPreviewWrap');
-
-  // 원본 크기 경고 (10MB 초과)
-  if (file.size > 10 * 1024 * 1024) {
-    status.textContent = '⚠️ 사진이 너무 커요 (10MB 초과). 더 작은 사진을 선택해주세요.';
-    status.className = 'photo-status warn';
-    previewWrap.classList.remove('has-photo');
-    return;
-  }
-
-  status.textContent = '🗜️ 압축 중...';
-  status.className = 'photo-status';
-  previewWrap.classList.add('has-photo');
-
-  try {
-    // 압축: 최대 800px, JPEG 65% — Sheets 용량 한도(50,000자) 고려
-    photoBase64 = await compressImage(file, 800, 0.65);
-    const img = document.getElementById('photoPreview');
-    img.src = 'data:image/jpeg;base64,' + photoBase64;
-
-    const kb = Math.round(photoBase64.length * 0.75 / 1024);
-    if (kb > 280) {
-      // Sheets 셀 한도 근접 경고
-      status.textContent = `⚠️ 압축 후 ${kb}KB — 저장 시 사진이 잘릴 수 있어요. 더 작은 사진을 권장해요.`;
-      status.className = 'photo-status warn';
-    } else {
-      status.textContent = `✅ 준비 완료 (${kb}KB)`;
-      status.className = 'photo-status';
-    }
-  } catch {
-    status.textContent = '⚠️ 사진 처리 실패. 다시 시도해주세요.';
-    status.className = 'photo-status warn';
-    previewWrap.classList.remove('has-photo');
-  }
-}
-
-document.getElementById('photosGallery').addEventListener('change', function() {
-  handlePhotoFile(this.files[0]);
-});
-document.getElementById('photosCamera').addEventListener('change', function() {
-  handlePhotoFile(this.files[0]);
-});
-
-document.getElementById('photoRemove').addEventListener('click', function() {
-  photoBase64 = null;
-  document.getElementById('photosGallery').value = '';
-  document.getElementById('photosCamera').value = '';
-  document.getElementById('photoPreviewWrap').classList.remove('has-photo');
-  const status = document.getElementById('photoStatus');
-  status.textContent = '';
-  status.className = 'photo-status';
-});
-
-// 이미지 압축 (Canvas, 최대 maxPx, JPEG quality)
-function compressImage(file, maxPx, quality) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      let w = img.width, h = img.height;
-      if (w > maxPx || h > maxPx) {
-        if (w > h) { h = Math.round(h * maxPx / w); w = maxPx; }
-        else { w = Math.round(w * maxPx / h); h = maxPx; }
-      }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      const dataUrl = canvas.toDataURL('image/jpeg', quality);
-      resolve(dataUrl.split(',')[1]);
-    };
-    img.onerror = reject;
-    img.src = URL.createObjectURL(file);
-  });
-}
-
 // 제출
 document.getElementById('form').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -417,7 +266,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     어려웠던점: document.getElementById('challenges').value,
     감정일기: document.getElementById('diary').value,
     다음계획: document.getElementById('nextPlan').value,
-    사진: photoBase64 || '',
+    사진링크: document.getElementById('photoUrl').value,
     에세이여부: document.getElementById('essayToggle').checked ? '✅' : '',
     에세이테마: themes.join(', '),
     에세이메모: document.getElementById('essayMemo').value,
@@ -447,8 +296,6 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     if (json.result === 'success') {
       showBanner('success', '🎉 오늘 일지가 구글 시트에 저장됐어! 수고했어 💪');
       this.reset(); di.value = new Date().toISOString().split('T')[0];
-      photoBase64 = null;
-      document.getElementById('photoPreviewWrap').classList.remove('has-photo');
       document.getElementById('essayFields').classList.remove('open');
     } else {
       throw new Error(json.message || '저장 실패');
