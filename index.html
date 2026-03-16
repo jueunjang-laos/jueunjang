@@ -988,11 +988,11 @@ async function loadTimeline(){
       }
       if(i===0) console.log('[Timeline] First entry cat:', cat, 'hangulSessions:', hangulSessions, 'hangulMins:', hangulMins);
 
-      // Image column — convert Google Drive share URL to direct embed URL
+      // Image column — convert Google Drive share URL to lh3 direct embed URL
       let imgUrl = d['사진링크']||d['사진URL']||d['이미지URL']||d['photo_url']||'';
       if(imgUrl){
         const m = imgUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if(m) imgUrl = `https://drive.google.com/uc?export=view&id=${m[1]}`;
+        if(m) imgUrl = `https://lh3.googleusercontent.com/d/${m[1]}`;
       }
       const imgHtml = imgUrl ? `<div class="tl-img"><img src="${imgUrl}" alt="수업 사진" loading="lazy" onerror="this.parentElement.style.display='none'"></div>` : '';
 
