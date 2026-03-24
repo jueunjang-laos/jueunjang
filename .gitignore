@@ -1,0 +1,15 @@
+# ── 개발 메모 (배포 불필요) ──
+implementation_plan.md
+timeline.html
+
+# ── 원본 대용량 이미지 폴더 (base64 or 루트에 별도 관리) ──
+assets/
+
+# ── 공백 포함 동영상 (GitHub에 불필요) ──
+"2026_02_25 10_14.mp4"
+"2026_02_25 10_15.mp4"
+
+# ── 시스템 파일 ──
+.DS_Store
+Thumbs.db
+desktop.ini
