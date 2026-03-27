@@ -2454,7 +2454,7 @@
     // ⚠️ 시트에서 파일 → 공유 → 웹에 게시 → 시트1 → CSV → 게시 버튼 눌러야 작동!
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRihEegYUxBULsqkZhgVcNAug7DKQfD3mU-jJehpuWgZfIYcMefLLGkPTAdyXbdLguWCqMmiQMCoSg2/pub?gid=0&single=true&output=csv';
     // ↑ 만약 위 URL이 안 되면, 시트에서 파일→공유→웹에 게시→CSV 링크를 복붙하세요
-    const EXTRA_HOURS = 0; // 씨엥쿠앙 시간은 구글시트에서 계산
+    const EXTRA_HOURS = 0; // 씨엥쿠앙 시간은 구글시트에서 집계 (xkMins)
 
     // ─── HERO PHOTO ───
     // 봉사활동 히어로 사진 (외부 파일 참조)
@@ -2545,7 +2545,7 @@
         }
         const headers = rows[0];
         const entries = rows.slice(1).reverse();
-        let hangulSessions = 0, hangulMins = 0, html = '';
+        let hangulSessions = 0, hangulMins = 0, xkMins = 0, html = '';
         entries.forEach((row, i) => {
           const d = {};
           headers.forEach((h, j) => d[h.trim()] = (row[j] || '').trim());
@@ -2562,10 +2562,12 @@
             else cat = 'hangul';
           }
 
-          // Count hangul sessions and hangul volunteer minutes only
+          // Count sessions and minutes by category
           if (cat === 'hangul') {
             hangulSessions++;
             hangulMins += parseInt(d['수업시간'] || 0);
+          } else if (cat === 'interpreter') {
+            xkMins += parseInt(d['수업시간'] || 0);
           }
           // Image column — convert Google Drive share URL to lh3 direct embed URL
           let imgUrl = d['사진링크'] || d['사진URL'] || d['이미지URL'] || d['photo_url'] || '';
@@ -2602,7 +2604,7 @@
         });
         container.innerHTML = html;
         // 분 → 시간 변환 (소수점 없으면 정수로 표시)
-        const rawHours = hangulMins / 60 + EXTRA_HOURS;
+        const rawHours = (hangulMins + xkMins) / 60 + EXTRA_HOURS;
         const totalHours = Number.isInteger(rawHours) ? rawHours : parseFloat(rawHours.toFixed(1));
         updateStats(hangulSessions, totalHours);
         initObserver();
