@@ -1987,13 +1987,16 @@
       </div>
       <div class="gallery-outer fade-up" style="transition-delay:0.1s">
         <div class="gallery-card">
-          <div class="gallery-card-img placeholder"
-            style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2d5016,#5a8a42);color:white;height:200px;font-size:2.5rem;">
-            🐕</div>
+          <div class="gallery-card-img" style="display:flex;gap:4px;height:200px;overflow:hidden;border-radius:8px 8px 0 0;">
+            <img src="./clay_dogs_collection_main.jpg" alt="Clay Sculpture Series — Dog Collection" loading="lazy"
+              style="width:50%;height:100%;object-fit:cover;">
+            <img src="./clay_dogs_collection_full.jpg" alt="Clay Sculpture Series — Dog Collection" loading="lazy"
+              style="width:50%;height:100%;object-fit:cover;">
+          </div>
           <div class="gallery-card-body">
             <div class="gallery-card-tag">Sculpture · Elementary</div>
             <div class="gallery-card-title">Air-Clay Animal Sculptures</div>
-            <div class="gallery-card-desc">A collection of air-clay sculptures made in elementary school — dozens of dogs, each shaped by hand from observation. The earliest evidence of a habit I've never stopped: making three-dimensional forms to understand living creatures.</div>
+            <div class="gallery-card-desc">Clay Sculpture Series — Dog Collection. Handcrafted clay figures made during elementary school years in Laos. An early exploration of animal form and anatomy through sculpture.</div>
           </div>
         </div>
         <div class="gallery-card">
@@ -2170,7 +2173,7 @@
           members and Lao school staff and students — enabling classroom instruction, school events, and community
           activities. The role demanded cultural sensitivity, real-time judgment, and the ability to make both sides
           feel genuinely heard.</p>
-        <p>Across three trips, I contributed approximately 60 hours of active service. The school issued an official
+        <p>Across three trips, I contributed approximately <span id="xkHoursInline">—</span> hours of active service. The school issued an official
           verification letter in Lao — rare documentation that formally confirms this role.</p>
         <p>Beyond interpreting, I picked up a brush. The mission team painted two large murals on the school walls — an
           ark of animals crossing open water, and a garden scene of children among trees and flowers. It was physical,
@@ -2451,7 +2454,7 @@
     // ⚠️ 시트에서 파일 → 공유 → 웹에 게시 → 시트1 → CSV → 게시 버튼 눌러야 작동!
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRihEegYUxBULsqkZhgVcNAug7DKQfD3mU-jJehpuWgZfIYcMefLLGkPTAdyXbdLguWCqMmiQMCoSg2/pub?gid=0&single=true&output=csv';
     // ↑ 만약 위 URL이 안 되면, 시트에서 파일→공유→웹에 게시→CSV 링크를 복붙하세요
-    const EXTRA_HOURS = 60; // 씨엥쿠앙 봉사활동 시간
+    const EXTRA_HOURS = 0; // 씨엥쿠앙 시간은 구글시트에서 계산
 
     // ─── HERO PHOTO ───
     // 봉사활동 히어로 사진 (외부 파일 참조)
@@ -2554,7 +2557,7 @@
           let cat = (d['카테고리'] || '').toLowerCase();
           if (!cat) {
             const topic = (d['수업주제'] || '').toLowerCase();
-            if (topic.includes('통역') || topic.includes('씨엥')) cat = 'interpreter';
+            if (topic.includes('통역') || topic.includes('씨엥') || topic.includes('xieng') || topic.includes('interpreter')) cat = 'interpreter';
             else if (topic.includes('해양') || topic.includes('marine') || topic.includes('바다')) cat = 'marine';
             else cat = 'hangul';
           }
@@ -2613,7 +2616,7 @@
       </span>
     </div>`;
         // 시트 연결 전 기본 통계 (한글세션 시작, 봉사시간은 기존 통역/교육 활동 포함)
-        updateStats(0, 60);
+        updateStats(0, '—');
       }
     }
 
@@ -2634,7 +2637,12 @@
       });
     }
     function fmtDate(s) { if (!s) return ''; const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
-    function updateStats(s, h) { animN('statSessions', s); animN('statHours', h || '—'); }
+    function updateStats(s, h) {
+      animN('statSessions', s);
+      animN('statHours', h || '—');
+      const inline = document.getElementById('xkHoursInline');
+      if (inline) inline.textContent = (h && h !== '—') ? h : '—';
+    }
     function animN(id, t) {
       if (typeof t !== 'number') { document.getElementById(id).textContent = t; return; }
       const el = document.getElementById(id);
