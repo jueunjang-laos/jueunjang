@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jueun Jang — Artist, Educator & Aquarium Dreamer</title>
+  <meta name="description" content="Portfolio of Jueun Jang — visual artist, Hangul educator, and aspiring aquarium professional raised in Laos for 11 years. Trilingual in Korean, Lao, and English. Berea College Class of 2027 applicant.">
+  <meta property="og:title" content="Jueun Jang — Artist, Educator & Aquarium Dreamer">
+  <meta property="og:description" content="Art, biology, and service — converging in one portfolio from Vientiane, Laos.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐠</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap"
@@ -1038,6 +1042,13 @@
       color: var(--ocean-bright);
     }
 
+    .cat-artbio {
+      background: rgba(27, 94, 32, 0.08);
+      color: #1b5e20;
+      border: 1px solid rgba(27, 94, 32, 0.2);
+      font-weight: 600;
+    }
+
     .tl-img {
       margin-top: 0.8rem;
       border-radius: 8px;
@@ -1677,7 +1688,7 @@
     }
 
     .essay-body.open {
-      max-height: 1000px;
+      max-height: 1800px;
       opacity: 1;
     }
 
@@ -1780,6 +1791,7 @@
       <a href="#journey">Hangul Journal</a>
       <a href="#xiengkhouang">Xieng Khouang</a>
       <a href="#awards">Awards</a>
+      <a href="#reflection">Reflection</a>
       <a href="#comingsoon">Coming Soon</a>
     </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu" aria-expanded="false">
@@ -1795,6 +1807,7 @@
     <a href="#journey" class="nav-mobile-link">Hangul Journal</a>
     <a href="#xiengkhouang" class="nav-mobile-link">Xieng Khouang</a>
     <a href="#awards" class="nav-mobile-link">Awards</a>
+    <a href="#reflection" class="nav-mobile-link">Reflection</a>
     <a href="#comingsoon" class="nav-mobile-link">Coming Soon</a>
   </div>
 
@@ -2131,9 +2144,9 @@
           <div class="lang-tag">Mother Tongue</div>
           <div class="lang-name">한국어 · Korean</div>
           <div class="lang-level">Native fluency. The language of my family, my church, my heritage. I taught its
-            alphabet — Hangul — to 50+ Lao kindergarteners over one year, designing my own curriculum from scratch.
+            alphabet — Hangul — to a class of 25 Lao kindergarteners across 7+ weekly sessions, designing my own curriculum from scratch.
           </div>
-          <span class="lang-highlight">📚 Taught to 50+ children</span>
+          <span class="lang-highlight">📚 25 students · 7+ sessions · self-designed</span>
         </div>
         <div class="lang-block lang-block-lo">
           <div class="lang-tag">Adopted Language</div>
@@ -2175,6 +2188,7 @@
     <div class="filter-bar fade-up" style="max-width:860px;margin:0 auto 2.5rem;">
       <button class="filter-btn active" onclick="filterTimeline('all', this)">All Activities</button>
       <button class="filter-btn" onclick="filterTimeline('hangul', this)">한글 교육</button>
+      <button class="filter-btn" onclick="filterTimeline('artbio', this)">Art × Biology</button>
       <button class="filter-btn" onclick="filterTimeline('interpreter', this)">통역 미션</button>
       <button class="filter-btn" onclick="filterTimeline('marine', this)">해양생물 프로젝트</button>
     </div>
@@ -2258,14 +2272,22 @@
         <div class="cert-box">
           <div class="cert-box-title">📋 Official Verification Letter · 봉사확인서</div>
           <div class="cert-box-sub">Issued by Somvatthana School, Xieng Khouang Province · 06/09/2023</div>
-          <div
-            style="margin-top:1.2rem;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(10,37,64,0.18);border:2px solid rgba(212,168,67,0.3);">
-            <iframe
-              src="./2023_XiengKhouang_Volunteer_Service_Certificate_v1.pdf"
-              style="width:100%;height:520px;border:none;border-radius:10px;display:block;"
-              title="봉사확인서 — Somvatthana School 2023">
-              <p style="padding:1rem;color:#888;">PDF를 볼 수 없는 경우 <a href="./2023_XiengKhouang_Volunteer_Service_Certificate_v1.pdf" target="_blank" rel="noopener">여기서 열기</a>.</p>
-            </iframe>
+          <div style="margin-top:1.2rem;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(10,37,64,0.18);border:2px solid rgba(212,168,67,0.3);">
+            <object
+              data="./2023_XiengKhouang_Volunteer_Service_Certificate_v1.pdf"
+              type="application/pdf"
+              style="width:100%;height:520px;border-radius:10px;display:block;">
+              <!-- Mobile / no-PDF-plugin fallback -->
+              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2.5rem 1.5rem;background:rgba(255,255,255,0.04);min-height:220px;text-align:center;">
+                <div style="font-size:2.5rem;">📋</div>
+                <p style="font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.6;max-width:320px;">Official Verification Letter issued by Somvatthana School, Xieng Khouang Province · 06/09/2023</p>
+                <a href="./2023_XiengKhouang_Volunteer_Service_Certificate_v1.pdf"
+                   target="_blank" rel="noopener"
+                   style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.4rem;background:rgba(212,168,67,0.15);border:1px solid rgba(212,168,67,0.4);border-radius:30px;color:var(--gold);font-size:0.82rem;font-weight:500;text-decoration:none;letter-spacing:0.06em;">
+                  View Certificate →
+                </a>
+              </div>
+            </object>
           </div>
           <div
             style="margin-top:0.8rem;display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;color:var(--gold);font-weight:500;letter-spacing:0.06em;">
@@ -2315,19 +2337,20 @@
     </div>
   <!-- ─── Personal Account ─── -->
   <div class="fade-up" style="margin-top:3rem;padding:2.5rem 2.4rem;background:#f0f5fa;border:1px solid #d0dce8;border-radius:20px;max-width:1100px;margin-left:auto;margin-right:auto;">
-    <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#1e8fe3;margin-bottom:0.9rem;">✦ Personal Account · 30-Minute Summary</div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:#0a2540;margin-bottom:0.6rem;font-weight:600;line-height:1.35;">Three Reasons the Road Was Worth It</h3>
-    <p style="font-size:0.88rem;color:#6b7e8f;line-height:1.7;margin-bottom:0;">Curiosity, children, and sky — the three things that made nine hours on a dirt road worth every minute.</p>
+    <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#1e8fe3;margin-bottom:0.9rem;">✦ Personal Account · In Her Own Words</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:#0a2540;margin-bottom:0.6rem;font-weight:600;line-height:1.35;">What Kept Bringing Me Back</h3>
+    <p style="font-size:0.88rem;color:#6b7e8f;line-height:1.7;margin-bottom:0;">Three years. Three trips on a nine-hour dirt road. Each time, I went back because I couldn't stop thinking about the children I met the year before.</p>
     <button class="essay-toggle-btn" id="essayToggleBtn" aria-expanded="false">
       Read the account <span class="arrow">▼</span>
     </button>
     <div class="essay-body" id="essayBody">
       <div style="font-family:'Outfit',sans-serif;font-size:0.95rem;line-height:1.88;color:#3a4a5a;display:flex;flex-direction:column;gap:1.15rem;margin-top:1.4rem;">
-        <p>I volunteered for translation service at Xiang Khuang, Laos, for three years. I worked for the kindergarten, and other students and a pastor who are from Korea church. I translate a special Korean class and moderator's words during a kindergarten festival.</p>
-        <p>The first reason I went to Xiang Khuang was <strong style="color:#0a2540;">curiosity</strong>. Never in my life visited a local kindergarten, so I decided to watch them with my own eyes, by participating as an interpreter. The first thing I saw when I rode a bus was a dirt road. The road to Xiang Khuang was so hard and long that it even made me regret my decision every time. It was a nine hour full trip; and finally arrived.</p>
-        <p>Second, I saw <strong style="color:#0a2540;">children</strong>. Unlike kids in the capital, the children are very pure and sincere. They thanked me genuinely, easily expressed their feelings, and were very creative. The moment that I can see their creativity was when the main event of the school festival began. They made a cloth out of used paper and trash can like real fashion show clothing.</p>
-        <p>Third, I experienced the <strong style="color:#0a2540;">wonderful nature</strong> of Xiang Khuang. It has a large plain that is filled with a huge jar called Plain of Jars. Also the beauty of the sky was wonderful. Every morning it showed me a cloud's work of art, and every afternoon the sky was filled with golden and orange sunset.</p>
-        <p>That's the three main reasons why the trip to Xiang Khuang was highly rewarding to me. If I didn't go there I might miss all of the things that are a great valuable knowledge to me.</p>
+        <p>Nine hours on a dirt road is a long time to have second thoughts.</p>
+        <p>The first time I went to Xieng Khouang, I had signed up to interpret for a Korean church mission at Somvatthana School — a kindergarten in the mountains of northern Laos. My Lao was conversational. I had never done anything like this before. Somewhere around hour four of the bus ride, with the road getting narrower and the potholes getting deeper, I started wondering whether I had made a mistake.</p>
+        <p>I hadn't. The school festival was already running when we arrived. The children walked out in costumes they had made from used paper and trash bags — a full fashion show, staged on a concrete courtyard, with no budget and no self-consciousness. I had come to interpret words. I ended up watching children teach me something about what creativity actually requires: not resources, but the decision to make something out of whatever is in front of you.</p>
+        <p>I went back the following year. The reason, if I'm honest, was simple: I kept thinking about their faces.</p>
+        <p>By the third trip, the work had changed shape. Each mission lasted three to seven days on-site. I interpreted in real time — across classrooms, teacher meetings, school events — which sounds manageable until you're trying to render a joke from one culture that has no equivalent in another. Interpretation, I learned, is not about words. It is about judgment: reading the room, reading the speaker, deciding in half a second what the other language actually needs.</p>
+        <p>Sixty hours of that work, across three years. The road never got shorter. But by the third time, I stopped noticing. That, I think, is what service actually looks like — not a single gesture of goodwill, but the practice of showing up to the same place, for the same people, until the distance starts to feel like belonging.</p>
       </div>
     </div>
   </div>
@@ -2387,8 +2410,7 @@
               style="opacity:0;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;">
             <div class="cert-viewer-label" id="certLabel">2022 · Peace Award · Laos Art Festival</div>
           </div>
-          <div class="awards-note">All awards issued by the National Unification Advisory Council (민주평화통일자문회의). Upload
-            scans at the file paths: images/cert1.jpg → cert4.jpg</div>
+          <div class="awards-note">All awards issued by the National Unification Advisory Council (민주평화통일자문회의), an official advisory body to the President of South Korea.</div>
         </div>
       </div>
     </div>
@@ -2482,6 +2504,47 @@
     // ↑ 만약 위 URL이 안 되면, 시트에서 파일→공유→웹에 게시→CSV 링크를 복붙하세요
     const EXTRA_HOURS = 0; // 씨엥쿠앙 시간은 구글시트에서 집계 (xkMins)
 
+    // ─── EPISODE META ───
+    // Curated English captions keyed by session number (회차).
+    // Falls back to raw CSV data for any session not listed here.
+    const EPISODE_META = {
+      1: {
+        title: 'The Silence After the Game',
+        snapshot: 'A girl who lost the circle-dance game refused to stop crying. The Lao teacher\'s words froze the room. I stood there, unable to say anything — I had come to teach Korean, but the first lesson was learning whose classroom this actually was.',
+        artbio: false
+      },
+      2: {
+        title: 'Sanai, and the Lunch I Didn\'t Plan',
+        snapshot: 'A boy named Sanai answered every question correctly. Class ended at 10:10. I should have left. The Lao teacher was setting up lunch alone — and somewhere between Korean tutor and kitchen helper, the line disappeared. It didn\'t feel wrong. It felt necessary.',
+        artbio: false
+      },
+      3: {
+        title: '25 Students. 4 Correct Answers.',
+        snapshot: 'We read numbers one through ten off a YouTube video. Sanai got every answer. Four students could write them. Fewer came than last week. I made a note: simplify the game next time.',
+        artbio: false
+      },
+      4: {
+        title: 'The Hand I Held Over My Lips',
+        snapshot: 'A girl with autism tried to kiss me throughout the entire class. I covered my mouth with my hand. She found another way — she smiled and kissed my cheek instead. I wasn\'t sure what the right response was. So I smiled back.',
+        artbio: false
+      },
+      5: {
+        title: 'Twenty Balloons, Zero Lesson Plans',
+        snapshot: 'We played a family-titles game using balloons. Nobody cared about 아버지 or 어머니. Every child wanted the balloon itself. I learned something about attention spans — and about designing games backwards from what kids actually want.',
+        artbio: false
+      },
+      6: {
+        title: 'Princess, for Attention',
+        snapshot: 'Attention had started to leave the room. So I picked up a pen and drew a princess on a scrap of paper. Handed it out as a prize. Twenty-three children looked up at once. I hadn\'t planned it — but I filed it away: a drawing can do what a worksheet cannot.',
+        artbio: true
+      },
+      7: {
+        title: 'Eight Drawings. Eight Minutes.',
+        snapshot: 'The topic was animals in Korean. Flashcards, repetition, quiz. Then attention slipped. I drew a dolphin. A rabbit. A tiger. Eight animals on scrap paper, one by one, passed out as rewards. From every corner of the room: "Draw me one too." That classroom — for eight minutes — became my first exhibit.',
+        artbio: true
+      }
+    };
+
     // ─── HERO PHOTO ───
     // 봉사활동 히어로 사진 (외부 파일 참조)
     (function () {
@@ -2528,8 +2591,8 @@
           item.style.display = '';
           shown++;
         } else {
-          const itemCat = item.getAttribute('data-category') || 'hangul';
-          if (itemCat === cat) {
+          const itemCats = (item.getAttribute('data-category') || 'hangul').split(' ');
+          if (itemCats.includes(cat)) {
             item.style.display = '';
             shown++;
           } else {
@@ -2614,16 +2677,25 @@
           const safeTopic = esc(d['수업주제'] || 'Untitled');
           const safeSession = esc(d['회차'] || String(hangulSessions));
 
-          html += `<div class="tl-item" data-category="${esc(cat)}" style="transition-delay:${i * 0.06}s">
+          // Use curated EPISODE_META captions when available
+          const round = parseInt(d['회차']);
+          const meta = EPISODE_META[round];
+          const displayTitle = meta ? meta.title : safeTopic;
+          const displayExcerpt = meta ? esc(meta.snapshot) : safeExcerpt;
+          const isArtBio = !!(meta && meta.artbio);
+
+          const dataCategories = isArtBio ? `${esc(cat)} artbio` : esc(cat);
+          html += `<div class="tl-item" data-category="${dataCategories}" style="transition-delay:${i * 0.06}s">
         <div class="tl-date">${fmtDate(d['날짜'])}</div>
         <div style="position:relative"><div class="tl-dot"></div>
         <div class="tl-content">
           <div class="tl-session">Session ${safeSession}</div>
-          <div class="tl-topic">${safeTopic}</div>
-          ${safeActivity ? `<div class="tl-activity">📌 ${safeActivity.substring(0, 120)}${safeActivity.length > 120 ? '…' : ''}</div>` : ''}
-          ${safeExcerpt ? `<div class="tl-excerpt">${safeExcerpt}${safeExcerpt.length === 260 ? '…' : ''}</div>` : ''}
+          <div class="tl-topic">${displayTitle}</div>
+          ${safeActivity && !meta ? `<div class="tl-activity">📌 ${safeActivity.substring(0, 120)}${safeActivity.length > 120 ? '…' : ''}</div>` : ''}
+          ${displayExcerpt ? `<div class="tl-excerpt">${displayExcerpt}</div>` : ''}
           ${safeMood ? `<div class="tl-mood">${safeMood}</div>` : ''}
           <span class="tl-cat-tag ${catClass}">${catLabel}</span>
+          ${isArtBio ? '<span class="tl-cat-tag cat-artbio">Art × Biology</span>' : ''}
           ${d['에세이여부'] ? '<span class="tl-essay-tag">✦ Essay material</span>' : ''}
           ${imgHtml}
         </div></div></div>`;
