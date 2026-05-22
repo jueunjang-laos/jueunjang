@@ -2823,7 +2823,7 @@
 
           // Use curated EPISODE_META captions when available
           const round = parseInt(d['회차']);
-          const meta = EPISODE_META[round];
+          const meta = cat === 'hangul' ? EPISODE_META[round] : null;
           const displayTitle = meta ? meta.title : safeTopic;
           const displayExcerpt = meta ? esc(meta.snapshot) : safeExcerpt;
           const isArtBio = !!(meta && meta.artbio);
