@@ -2593,6 +2593,39 @@
             education, and the aquarium career I am building.</p>
         </div>
       </div>
+
+      <!-- ── Essay: Dignity of Labor ── -->
+      <div class="fade-up" style="margin-top:3.5rem;padding:2.5rem 2.6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(78,205,196,0.18);border-radius:20px;max-width:1000px;margin-left:auto;margin-right:auto;">
+        <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--seafoam);margin-bottom:0.9rem;">
+          ✦ Reflection · May 22, 2026 · Session 8
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:white;margin-bottom:0.4rem;font-weight:600;line-height:1.3;">
+          The Work Before the Performance
+        </h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin-bottom:0.3rem;letter-spacing:0.04em;">
+          On Dignity of Labor, Service as Method, and Berea College's Work Program
+        </p>
+        <p style="font-size:0.9rem;line-height:1.78;color:rgba(255,255,255,0.55);margin-top:1rem;margin-bottom:0;">
+          There is a moment in every graduation ceremony that the audience does not see: the hour before the children take the stage. Today, that hour looked like this — writing Lao script on a whiteboard, folding paper into airplanes, and standing at the edge of a stage counting children who kept wandering off their marks.
+        </p>
+        <button class="essay-toggle-btn" id="laborEssayBtn" aria-expanded="false" style="color:var(--seafoam);border-color:rgba(78,205,196,0.35);">
+          Read the reflection <span class="arrow">▼</span>
+        </button>
+        <div class="essay-body" id="laborEssayBody">
+          <div style="font-family:'Outfit',sans-serif;font-size:0.95rem;line-height:1.9;color:rgba(255,255,255,0.72);display:flex;flex-direction:column;gap:1.2rem;margin-top:1.5rem;border-top:1px solid rgba(78,205,196,0.12);padding-top:1.5rem;">
+            <p>There is a moment in every graduation ceremony that the audience does not see: the hour before the children take the stage. Today, that hour looked like this — writing Lao script on a whiteboard, folding paper into airplanes, distributing decorated props to twenty-five five-year-olds who had already decided the airplanes were more interesting than the instructions, and standing at the edge of a stage in a borrowed kindergarten uniform, counting children who kept wandering off their marks.</p>
+            <p>That is the work. Not the performance — the performance lasted eight minutes. The work is everything that makes eight minutes possible.</p>
+            <p>I have been thinking, over the past several months, about what Berea College means when it says every student works. Not "every student receives financial aid in exchange for campus labor" — the Work Program is philosophically older and more serious than that framing. Berea's founders argued that labor is not a price to pay for education. It <em style="color:rgba(255,255,255,0.88);">is</em> education. The discipline of showing up, of doing the unglamorous task well, of understanding that no work which serves others is beneath you — these are not byproducts of the program. They are its thesis.</p>
+            <p>I have been living something like that thesis, without knowing it had a name. The visible part of my service record is the Hangul curriculum — eight sessions, self-designed, twenty-five students, a Korean folk song performed at a Lao kindergarten graduation. The invisible part is the session where I helped set up lunch because the teacher was alone. The part where I cleaned up after a balloon game no one won. Today, the part where I carried paper airplanes up a stage staircase and placed them, one by one, into children's hands. That labor does not appear on any certificate. It also does not need to.</p>
+            <p>Berea asks its students to labor not because labor builds character in the abstract, but because shared work builds community in the specific. I do not know what my work assignment will be at Berea. But I know what I have already learned about work from a classroom in Vientiane: the children who fly the planes on stage are not separate from the person who folded them the night before. The service is not the performance. The service is the labor that makes the performance true.</p>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.35);border-top:1px solid rgba(78,205,196,0.1);padding-top:1rem;margin-top:0.5rem;">
+              — Jueun Jang · Vientiane, Laos · May 22, 2026<br>
+              <span style="font-style:italic;">Draft for Berea College Common App essay consideration · "Dignity of Labor" theme</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2885,6 +2918,21 @@
         btn.innerHTML = isOpen
           ? 'Close <span class="arrow">▼</span>'
           : 'Read the account <span class="arrow">▼</span>';
+      });
+    })();
+
+    // ─── LABOR ESSAY TOGGLE ───
+    (function () {
+      const btn = document.getElementById('laborEssayBtn');
+      const body = document.getElementById('laborEssayBody');
+      if (!btn || !body) return;
+      btn.addEventListener('click', () => {
+        const isOpen = body.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', isOpen);
+        btn.innerHTML = isOpen
+          ? 'Close <span class="arrow">▼</span>'
+          : 'Read the reflection <span class="arrow">▼</span>';
       });
     })();
 
