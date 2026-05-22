@@ -2751,7 +2751,7 @@
       if (shown === 0 && cat !== 'all') {
         const empty = document.createElement('div');
         empty.className = 'loading-msg filter-empty';
-        const label = cat === 'interpreter' ? '통역 미션' : cat === 'marine' ? '해양생물 프로젝트' : '한글 교육';
+        const label = cat === 'interpreter' ? '통역 미션' : cat === 'marine' ? '해양생물 프로젝트' : cat === 'artbio' ? 'Art × Biology' : '한글 교육';
         empty.textContent = `아직 "${label}" 항목이 없어 — write.html에서 첫 기록을 남겨봐!`;
         container.appendChild(empty);
       }
@@ -2821,9 +2821,9 @@
           const safeTopic = esc(d['수업주제'] || 'Untitled');
           const safeSession = esc(d['회차'] || String(hangulSessions));
 
-          // Use curated EPISODE_META captions when available
+          // Use curated EPISODE_META captions when available (hangul category only)
           const round = parseInt(d['회차']);
-          const meta = EPISODE_META[round];
+          const meta = cat === 'hangul' ? EPISODE_META[round] : null;
           const displayTitle = meta ? meta.title : safeTopic;
           const displayExcerpt = meta ? esc(meta.snapshot) : safeExcerpt;
           const isArtBio = !!(meta && meta.artbio);
