@@ -259,6 +259,57 @@
       margin-top: 0.3rem;
     }
 
+    .stat-scene {
+      font-size: 0.72rem;
+      color: var(--warm-gray);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+      max-width: 120px;
+    }
+
+    .hero-threads {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(10, 37, 64, 0.1);
+      padding-top: 1.8rem;
+    }
+
+    .thread-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 0.7rem 1rem;
+      border: 1px solid rgba(10, 37, 64, 0.07);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.5);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .thread-item:hover {
+      border-color: rgba(26, 143, 227, 0.25);
+      background: rgba(26, 143, 227, 0.04);
+    }
+
+    .thread-icon {
+      font-size: 1.1rem;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .thread-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--ocean-deep);
+    }
+
+    .thread-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
     .hero-right {
       position: relative;
       overflow: hidden;
@@ -1826,16 +1877,43 @@
         the threads are visible in one place — since October 28, 2015.</p>
       <div class="hero-stats">
         <div>
-          <div class="stat-num" id="statSessions">—</div>
-          <div class="stat-label">Hangul Sessions</div>
+          <div class="stat-num">25명</div>
+          <div class="stat-label">라오 유치원생</div>
+          <div class="stat-scene">졸업식에서 한국 민요를 함께 불렀다</div>
         </div>
         <div>
           <div class="stat-num" id="statHours">—</div>
-          <div class="stat-label">Volunteer Hours</div>
+          <div class="stat-label">봉사 시간</div>
+          <div class="stat-scene">3개 언어 · 3개 교육 미션</div>
         </div>
         <div>
-          <div class="stat-num">6+</div>
-          <div class="stat-label">Art Portfolio Pieces</div>
+          <div class="stat-num">11년</div>
+          <div class="stat-label">라오스에서</div>
+          <div class="stat-scene">태어나지 않은 곳을 고향으로</div>
+        </div>
+      </div>
+
+      <div class="hero-threads">
+        <div class="thread-item">
+          <span class="thread-icon">🎨</span>
+          <div>
+            <div class="thread-title">Visual Artist</div>
+            <div class="thread-desc">6+ 포트폴리오 · 애니메이션 · 과학 일러스트레이션</div>
+          </div>
+        </div>
+        <div class="thread-item">
+          <span class="thread-icon">🗣</span>
+          <div>
+            <div class="thread-title">Educator</div>
+            <div class="thread-desc">한국어 · 라오어 · 영어 · 샹쿠앙 통역 3회</div>
+          </div>
+        </div>
+        <div class="thread-item">
+          <span class="thread-icon">🐠</span>
+          <div>
+            <div class="thread-title">Aquarium Dreamer</div>
+            <div class="thread-desc">교육 · 전시 디자인 · 보전 커뮤니케이션</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2883,7 +2961,7 @@
     }
     function fmtDate(s) { if (!s) return ''; const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
     function updateStats(s, h) {
-      animN('statSessions', s);
+
       animN('statHours', h || '—');
       const inline = document.getElementById('xkHoursInline');
       if (inline) inline.textContent = (h && h !== '—') ? h : '—';
