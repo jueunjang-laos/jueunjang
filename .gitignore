@@ -5,6 +5,7 @@ Jueun_Portfolio_Draft_20240526.pdf
 
 # ── 원본 대용량 이미지 폴더 (base64 or 루트에 별도 관리) ──
 assets/
+originals_backup/
 
 # ── 공백 포함 동영상 (GitHub에 불필요) ──
 "2026_02_25 10_14.mp4"
